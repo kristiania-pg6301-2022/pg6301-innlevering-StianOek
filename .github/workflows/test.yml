@@ -20,6 +20,6 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          base-path: ./client/coverage
+          base-path: pg6301-innlevering-StianOek
           path-to-lcov: client/coverage/lcov.info
           github-token: ${{ secrets.GITHUB_TOKEN }}
