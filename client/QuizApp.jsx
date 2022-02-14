@@ -1,11 +1,103 @@
-import React from 'react';
+import React, { useState } from "react";
+import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { isCorrectAnswer, randomQuestion } from "./questions";
+export const FrontPage = () => {
+  return (
+    <div>
+      <h1>Home page</h1>
+      <Link to="/question">
+        <button>New quiz</button>
+      </Link>
+      <Link to="/answer/*">
+        <button>Show anwers</button>
+      </Link>
+    </div>
+  );
+};
+
+export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
+  return (
+    <div>
+      <Routes>
+        <Route path={"correct"} element={<h1>Correct!</h1>} />
+        <Route path={"wrong"} element={<h1>Wrong!</h1>} />
+      </Routes>
+
+      <h2 data-testid={"status"}>
+        Your score is {isRightAnswer} / {isAnsweredQuestion}
+      </h2>
+      <Link to="/">
+        <button>Return to home</button>
+      </Link>
+      <Link to="/question">
+        <button>New quiz</button>
+      </Link>
+    </div>
+  );
+};
+
+export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
+  const [question, setQuestion] = useState(randomQuestion());
+  const navigate = useNavigate();
+
+  const handleRightAnswer = (answer) => {
+    if (isCorrectAnswer(question, answer)) {
+      console.log("right answer");
+      setIsRightAnswer((prev) => prev + 1);
+      setIsAnsweredQuestion((prev) => prev + 1);
+      navigate("/answer/correct");
+    } else {
+      console.log("Wrong answer");
+      setIsAnsweredQuestion((prev) => prev + 1);
+      navigate("/answer/wrong");
+    }
+  };
+
+  console.log(question);
+  return (
+    <div>
+      <h1>{question.question}</h1>
+      {Object.keys(question.answers)
+        .filter((answer) => question.answers[answer])
+        .map((value) => {
+          return (
+            <div key={value}>
+              <button onClick={() => handleRightAnswer(value)}>{question.answers[value]}</button>
+            </div>
+          );
+        })}
+    </div>
+  );
+};
 
 const QuizApp = () => {
-    return (
-        <div>
-            <h1>Is it working?</h1>
-        </div>
-    )
-}
+  const [isRightAnswer, setIsRightAnswer] = useState(0);
+  const [isAnsweredQuestion, setIsAnsweredQuestion] = useState(0);
+  return (
+    <div>
+      <Routes>
+        <Route path={"/"} element={<FrontPage />} />
+        <Route
+          path={"/question"}
+          element={
+            <Question
+              setIsRightAnswer={setIsRightAnswer}
+              setIsAnsweredQuestion={setIsAnsweredQuestion}
+            />
+          }
+        />
+        <Route
+          path={"/answer/*"}
+          element={
+            <Answer
+              isRightAnswer={isRightAnswer}
+              isAnsweredQuestion={isAnsweredQuestion}
+            />
+          }
+        />
+      </Routes>
+    </div>
+  );
+};
 
-export default QuizApp
+export default QuizApp;
