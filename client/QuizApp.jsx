@@ -62,7 +62,9 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
         .map((value) => {
           return (
             <div key={value}>
-              <button onClick={() => handleRightAnswer(value)}>{question.answers[value]}</button>
+              <button onClick={() => handleRightAnswer(value)}>
+                {question.answers[value]}
+              </button>
             </div>
           );
         })}

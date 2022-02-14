@@ -4,14 +4,33 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "format": "prettier --write *.{jsx,js}",
+    "format": "prettier --write *.{jsx,js} __tests__/**/*.{jsx,js}",
+    "format:check" : "prettier --check *.{jsx,js} __tests__/**/*.{jsx,js} ",
     "dev": "parcel index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:coverage": "jest --collect-coverage",
+    "verify": "npm run format:check && npm run test:coverage"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "babel": {
+    "presets": [
+      "@babel/preset-env",
+      "@babel/preset-react"
+    ]
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "*{.jsx,js}"
+    ]
+  },
   "devDependencies": {
+    "@babel/preset-env": "^7.16.11",
+    "@babel/preset-react": "^7.16.7",
+    "babel-jest": "^27.5.1",
+    "jest": "^27.5.1",
     "parcel": "^2.3.1",
     "prettier": "^2.5.1"
   },
