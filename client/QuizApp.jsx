@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { isCorrectAnswer} from "./questions";
-import useFetch from './useFetch'
+import { isCorrectAnswer } from "./questions";
+import useFetch from "./useFetch";
 export const FrontPage = () => {
   return (
     <div>
@@ -38,24 +38,23 @@ export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
 };
 
 export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
-    const [question, setQuestion] = useState();
-    const navigate = useNavigate();
+  const [question, setQuestion] = useState();
+  const navigate = useNavigate();
 
-    const loadQuestion = async () => {
-        const response = await fetch("/api/random");
-        const data = await response.json();
-        return data;
-    }
+  const loadQuestion = async () => {
+    const response = await fetch("/api/question");
+    const data = await response.json();
+    return data;
+  };
 
-    useEffect(async () => {
-        setQuestion(undefined);
-        setQuestion(await loadQuestion())
-    }, [])
+  useEffect(async () => {
+    setQuestion(undefined);
+    setQuestion(await loadQuestion());
+  }, []);
 
-    if(!question) {
-        return <h1>Loading...</h1>
-    }
-
+  if (!question) {
+    return <h1>Loading...</h1>;
+  }
 
   const handleRightAnswer = (answer) => {
     if (isCorrectAnswer(data, answer)) {
@@ -70,20 +69,19 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
     }
   };
 
-
   return (
     <div>
-    <h1>{question.question}</h1>
-        <h2>Category: {question.category}</h2>
-        {Object.keys(question.answers)
-            .filter((answer) => question.answers[answer])
-            .map((value) => {
-                return (
-                    <div key={value}>
-                        <button>{question.answers[value]}</button>
-                    </div>
-                );
-            })}
+      <h1>{question.question}</h1>
+      <h2>Category: {question.category}</h2>
+      {Object.keys(question.answers)
+        .filter((answer) => question.answers[answer])
+        .map((value) => {
+          return (
+            <div key={value}>
+              <button>{question.answers[value]}</button>
+            </div>
+          );
+        })}
     </div>
   );
 };

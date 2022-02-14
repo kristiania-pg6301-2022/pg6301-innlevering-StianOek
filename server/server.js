@@ -1,20 +1,35 @@
 import express from 'express';
 import path from 'path'
-import { randomQuestion } from './quiz.js';
+import bodyParser from "body-parser";
+import { randomQuestion, isCorrectAnswer, Questions } from './quiz.js';
 
 const app = express();
 
+app.use(bodyParser.json());
 
-app.get('/api/random', (req, res) => {
+
+
+app.get('/api/question', (req, res) => {
     const { id, question, answers, category } = randomQuestion();
     res.send({ id, question, answers, category });
-    return res
+
 });
+
+app.post("/api/question", (req, res) => {
+    const {id, answers} = req.body;
+    const question = Questions.find(questionID => questionID.id === id)
+
+    console.log(question)
+    if(!question) return res.sendStatus(404)
+
+
+
+})
 
 app.use(express.static("../client/dist"))
 app.use((req,res,next) => {
     res.sendFile(path.resolve("../client/dist/index.html"));
-    return res
+
 })
 
 
