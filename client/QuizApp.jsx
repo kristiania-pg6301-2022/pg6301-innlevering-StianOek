@@ -46,7 +46,7 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
     const data = await response.json();
     return data;
   };
-    console.log(question)
+  console.log(question);
   useEffect(async () => {
     setQuestion(undefined);
     setQuestion(await loadQuestion());
@@ -78,7 +78,10 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
         .map((value) => {
           return (
             <div key={value}>
-              <button data-testid={"button"} onClick={() => handleRightAnswer(value)}>
+              <button
+                data-testid={"button"}
+                onClick={() => handleRightAnswer(value)}
+              >
                 {question.answers[value]}
               </button>
             </div>
