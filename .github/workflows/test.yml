@@ -20,5 +20,5 @@ jobs:
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          base-path: client/coverage/
+          base-path: client/coverage
           github-token: ${{ secrets.GITHUB_TOKEN }}
