@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { isCorrectAnswer, randomQuestion } from "./questions";
+import { isCorrectAnswer} from "./questions";
+import useFetch from './useFetch'
 export const FrontPage = () => {
   return (
     <div>
@@ -37,11 +38,27 @@ export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
 };
 
 export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
-  const [question, setQuestion] = useState(randomQuestion());
-  const navigate = useNavigate();
+    const [question, setQuestion] = useState();
+    const navigate = useNavigate();
+
+    const loadQuestion = async () => {
+        const response = await fetch("/api/random");
+        const data = await response.json();
+        return data;
+    }
+
+    useEffect(async () => {
+        setQuestion(undefined);
+        setQuestion(await loadQuestion())
+    }, [])
+
+    if(!question) {
+        return <h1>Loading...</h1>
+    }
+
 
   const handleRightAnswer = (answer) => {
-    if (isCorrectAnswer(question, answer)) {
+    if (isCorrectAnswer(data, answer)) {
       console.log("right answer");
       setIsRightAnswer((prev) => prev + 1);
       setIsAnsweredQuestion((prev) => prev + 1);
@@ -53,21 +70,20 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
     }
   };
 
-  console.log(question);
+
   return (
     <div>
-      <h1>{question.question}</h1>
-      {Object.keys(question.answers)
-        .filter((answer) => question.answers[answer])
-        .map((value) => {
-          return (
-            <div key={value}>
-              <button onClick={() => handleRightAnswer(value)}>
-                {question.answers[value]}
-              </button>
-            </div>
-          );
-        })}
+    <h1>{question.question}</h1>
+        <h2>Category: {question.category}</h2>
+        {Object.keys(question.answers)
+            .filter((answer) => question.answers[answer])
+            .map((value) => {
+                return (
+                    <div key={value}>
+                        <button>{question.answers[value]}</button>
+                    </div>
+                );
+            })}
     </div>
   );
 };
