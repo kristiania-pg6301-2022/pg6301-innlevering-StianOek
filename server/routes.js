@@ -1,48 +1,47 @@
-import express from 'express';
-import { randomQuestion, isCorrectAnswer, Questions } from './quiz.js';
+import express from "express";
+import { randomQuestion, isCorrectAnswer, Questions } from "./quiz.js";
 import * as path from "path";
 
 export const QuestionRouter = express.Router();
 
-QuestionRouter.get('/api/question', (req, res) => {
+QuestionRouter.use(express.static(path.resolve("../client/dist")));
+
+QuestionRouter.use((req, res, next) => {
+  if (req.method === "GET" && !req.path.startsWith("/api")) {
+    res.sendFile(path.resolve("../client/dist/index.html"));
+  } else {
+    next();
+  }
+  const score = { answers: 0, correct: 0 };
+  const result = { result: "" };
+  QuestionRouter.get("/api/question", (req, res) => {
     const { id, question, answers, category } = randomQuestion();
-    res.send({ id, question, answers, category });
-});
+    res.json({ id, question, answers, category, score, result });
+  });
 
-QuestionRouter.post("/api/question", (req, res) => {
-    const body = req.body;
-    const id = body.id;
-    const answers = body.answers
-    const question = Questions.find(questionID => questionID.id === id)
-    console.log(id, answers)
-    if(!question) {
-        res.sendStatus(404)
-    } else {
-        res.sendStatus(200)
+  QuestionRouter.post("/api/question", (req, res) => {
+    const { id, answers } = req.body;
+    console.log({ id, answers });
+    const question = Questions.find((questionID) => questionID.id === id);
+
+    if (!question) {
+      res.sendStatus(404);
     }
-
-
-    const score = req.signedCookies.score ? JSON.parse(req.signedCookies.score) : {answers: 0, correct: 0};
-    score.answers += 1
+    const score = req.signedCookies.score
+      ? JSON.parse(req.signedCookies.score)
+      : { answers: 0, correct: 0 };
+    score.answers += 1;
     if (isCorrectAnswer(question, answers)) {
-        score.correct += 1;
-        res.cookie("score", JSON.stringify(score), { signed: true });
-        res.json({ result: "correct" });
+      console.log("riktig");
+      res.json({ result: "correct" });
+      res.cookie("score", JSON.stringify(score), { signed: true });
+      score.correct += 1;
     } else {
-        res.cookie("score", JSON.stringify(score), { signed: true });
-        res.json({ result: "incorrect" });
+      console.log("feil");
+      res.cookie("score", JSON.stringify(score), { signed: true });
+      res.json({ result: "incorrect" });
     }
 
-})
-
-QuestionRouter.use(express.static(path.resolve("../client/dist")))
-
-QuestionRouter.use((req,res,next) => {
-    if(req.method === "GET" && !req.path.startsWith("/api")) {
-        res.sendFile(path.resolve("../client/dist/index.html"));
-    } else {
-        next()
-    }
-
-
-})
+    console.log(score);
+  });
+});

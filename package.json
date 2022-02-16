@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm start",
-    "dev": "concurrently npm:dev:server && npm:dev:client",
+    "dev": "concurrently npm:dev:server npm:dev:client",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
     "verify": "cd client && npm run verify"

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import { isCorrectAnswer } from "./questions";
-import useFetch from "./useFetch";
+
 export const FrontPage = () => {
   return (
     <div>
@@ -39,7 +38,7 @@ export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
 
 export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
   const [question, setQuestion] = useState();
-  const [answer, setAnswer] = useState()
+  const [answer, setAnswer] = useState("");
   const navigate = useNavigate();
 
   const loadQuestion = async () => {
@@ -47,7 +46,7 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
     const data = await response.json();
     return data;
   };
-  console.log(question);
+
   useEffect(async () => {
     setQuestion(undefined);
     setQuestion(await loadQuestion());
@@ -57,20 +56,19 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
     return <h1>Loading...</h1>;
   }
 
-  const handleRightAnswer = (answer) => {
-      const result = {answer}
-      fetch("/api/question", {
-          method: 'POST',
-          headers: {
-              "Content-Type": "application/json"
-          },
-          body: JSON.stringify(result)
-      }).then(() => {
-          setAnswer(result)
-      })
-    console.log(result)
+  const handleRightAnswer = (answers) => {
+    const id = question.id;
+    fetch("/api/question", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id, answers }),
+    }).then(() => {
+      setAnswer(answers);
+    });
   };
-
+  console.log(question.result);
   return (
     <div>
       <h1>{question.question}</h1>
