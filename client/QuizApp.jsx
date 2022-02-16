@@ -16,6 +16,22 @@ export const FrontPage = () => {
 };
 
 export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
+  const [score, setScore] = useState();
+
+  console.log(score);
+  const loadScore = async () => {
+    const res = await fetch("/api/score");
+    const data = await res.json();
+    return data;
+  };
+
+  useEffect(async () => {
+    setScore(undefined);
+    setScore(await loadScore());
+  }, []);
+
+  if (!score) return <h1>LOADING...</h1>;
+
   return (
     <div>
       <Routes>
@@ -68,7 +84,7 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
       setAnswer(answers);
     });
   };
-  console.log(question.result);
+  console.log(question);
   return (
     <div>
       <h1>{question.question}</h1>
@@ -87,6 +103,7 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
             </div>
           );
         })}
+      <button onClick={() => navigate("/answer")}>Show answers</button>
     </div>
   );
 };

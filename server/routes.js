@@ -12,11 +12,10 @@ QuestionRouter.use((req, res, next) => {
   } else {
     next();
   }
-  const score = { answers: 0, correct: 0 };
-  const result = { result: "" };
+
   QuestionRouter.get("/api/question", (req, res) => {
     const { id, question, answers, category } = randomQuestion();
-    res.json({ id, question, answers, category, score, result });
+    res.json({ id, question, answers, category });
   });
 
   QuestionRouter.post("/api/question", (req, res) => {
@@ -43,5 +42,12 @@ QuestionRouter.use((req, res, next) => {
     }
 
     console.log(score);
+
+    QuizApp.get("/api/score", (req, res) => {
+      const score = req.signedCookies.score
+        ? JSON.parse(req.signedCookies.score)
+        : { answers: 0, correct: 0 };
+      res.send(score);
+    });
   });
 });
