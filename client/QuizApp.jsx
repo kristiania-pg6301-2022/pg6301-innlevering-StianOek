@@ -39,6 +39,7 @@ export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
 
 export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
   const [question, setQuestion] = useState();
+  const [answer, setAnswer] = useState()
   const navigate = useNavigate();
 
   const loadQuestion = async () => {
@@ -57,16 +58,17 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
   }
 
   const handleRightAnswer = (answer) => {
-    if (isCorrectAnswer(question, answer)) {
-      console.log("right answer");
-      setIsRightAnswer((prev) => prev + 1);
-      setIsAnsweredQuestion((prev) => prev + 1);
-      navigate("/answer/correct");
-    } else {
-      console.log("Wrong answer");
-      setIsAnsweredQuestion((prev) => prev + 1);
-      navigate("/answer/wrong");
-    }
+      const result = {answer}
+      fetch("/api/question", {
+          method: 'POST',
+          headers: {
+              "Content-Type": "application/json"
+          },
+          body: JSON.stringify(result)
+      }).then(() => {
+          setAnswer(result)
+      })
+    console.log(result)
   };
 
   return (

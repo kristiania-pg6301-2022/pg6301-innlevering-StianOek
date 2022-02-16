@@ -9,7 +9,6 @@ describe("QuizApp", () => {
     ReactDOM.render(
       <MemoryRouter>
         <FrontPage />
-        }/>
       </MemoryRouter>,
       element
     );
