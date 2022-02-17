@@ -27,5 +27,5 @@
 - [x] - First test GET
 - [x] - Let server serve react app
 - [x] - Fetch questions from /api/question
-- [ ] - Make a post request that match the random question from GET and return true or false
-- [ ] -
+- [x] - Make a post request that match the random question from GET and return true or false
+- [x] - Make score stored with cookies

@@ -32,11 +32,11 @@ QuestionRouter.post("/api/question", (req, res) => {
     score.correct += 1;
     console.log("riktig");
     res.cookie("score", JSON.stringify(score), { signed: true });
-    res.json({ result: "correct" });
+    return res.json({ result: "correct" });
   } else {
     console.log("feil");
     res.cookie("score", JSON.stringify(score), { signed: true });
-    res.json({ result: "incorrect" });
+    return res.json({ result: "incorrect" });
   }
 
   console.log(score);
