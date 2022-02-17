@@ -8,7 +8,7 @@ import path from "path";
 const app = express();
 dotenv.config();
 
-app.use(cookieParser("secret"));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(bodyParser.json());
 app.use(QuestionRouter);
 

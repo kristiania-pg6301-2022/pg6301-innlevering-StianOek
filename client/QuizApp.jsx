@@ -15,7 +15,8 @@ export const FrontPage = () => {
   );
 };
 
-export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
+export const Answer = () => {
+  const navigate = useNavigate();
   const [score, setScore] = useState();
 
   console.log(score);
@@ -40,7 +41,7 @@ export const Answer = ({ isRightAnswer, isAnsweredQuestion }) => {
       </Routes>
 
       <h2 data-testid={"status"}>
-        Your score is {isRightAnswer} / {isAnsweredQuestion}
+        Your score is {score.correct} / {score.answers}
       </h2>
       <Link to="/">
         <button>Return to home</button>
@@ -85,6 +86,7 @@ export const Question = ({ setIsRightAnswer, setIsAnsweredQuestion }) => {
     });
   };
   console.log(question);
+
   return (
     <div>
       <h1>{question.question}</h1>
