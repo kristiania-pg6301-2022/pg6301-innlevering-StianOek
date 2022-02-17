@@ -100,7 +100,7 @@ export const Question = ({ score }) => {
         .filter((answer) => question.answers[answer])
         .map((value) => {
           return (
-            <div className="buttonWrapper" key={value}>
+            <div className="answersWrapper" key={value}>
               <button
                 className="btn"
                 data-testid={"button"}
@@ -111,7 +111,6 @@ export const Question = ({ score }) => {
             </div>
           );
         })}
-      <button onClick={() => navigate("/answer")}>Show answers</button>
     </div>
   );
 };
