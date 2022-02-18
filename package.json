@@ -11,7 +11,8 @@
     "verify": "cd client && npm run verify",
     "prepare": "husky install",
     "pre-commit": "npm run prettier:check",
-    "prettier:check": "prettier --check client/**/*.{jsx}"
+    "prettier:check": "prettier --check client/*.{jsx,js} client/__tests__/**/*.{jsx,js}",
+    "format": "prettier --write client/*.{jsx,js} client/__tests__/**/*.{jsx,js}"
   },
   "repository": {
     "type": "git",
@@ -41,6 +42,7 @@
     "@babel/preset-react": "^7.16.7",
     "babel-jest": "^27.5.1",
     "concurrently": "^7.0.0",
+    "husky": "^7.0.4",
     "jest": "^27.5.1",
     "prettier": "^2.5.1"
   },
