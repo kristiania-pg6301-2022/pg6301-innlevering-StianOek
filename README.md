@@ -18,6 +18,7 @@
 - [x] - Get status badge from coveralls
 - [ ] - Get more coverage with jest
 - [x] - Let coveralls read tests with jest --coverage
+- [x] - Added husky to make sure i cannot commit a unformated code
 
 ### Server side
 
