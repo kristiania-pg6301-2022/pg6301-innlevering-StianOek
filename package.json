@@ -11,7 +11,7 @@
     "verify": "cd client && npm run verify",
     "prepare": "husky install",
     "pre-commit": "npm run prettier:check",
-    "prettier:check": "prettier --check **/*.{jsx}"
+    "prettier:check": "prettier --check client/**/*.{jsx}"
   },
   "repository": {
     "type": "git",
