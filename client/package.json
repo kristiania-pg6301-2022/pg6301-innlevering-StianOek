@@ -21,9 +21,6 @@
     ]
   },
   "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less|scss|sss|styl)$": "../client/node_modules/jest-css-modules"
-    },
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
       "*{.jsx,js}"
@@ -34,7 +31,6 @@
     "@babel/preset-react": "^7.16.7",
     "babel-jest": "^27.5.1",
     "jest": "^27.5.1",
-    "jest-css-modules": "^2.1.0",
     "parcel": "^2.3.1",
     "prettier": "^2.5.1"
   },

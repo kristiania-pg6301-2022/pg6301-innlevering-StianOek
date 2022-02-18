@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`QuizApp should show frontpage 1`] = `"<div class=\\"container\\"><div class=\\"titleWrapper\\"><h1 class=\\"title\\">Do you master javascript?</h1><h2 class=\\"subtitle\\">Take a test</h2></div><div class=\\"buttonWrapper\\"><a class=\\"link\\" href=\\"/question\\"><button class=\\"btn\\">New quiz</button></a><a class=\\"link\\" href=\\"/answer/*\\"><button class=\\"btn\\">Show anwers</button></a></div></div>"`;
+exports[`QuizApp should show frontpage 1`] = `"<div><div><h1>Do you master javascript?</h1><h2>Take a test</h2></div><div><a href=\\"/question\\"><button>New quiz</button></a><a href=\\"/answer/*\\"><button>Show anwers</button></a></div></div>"`;
