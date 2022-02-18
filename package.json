@@ -8,7 +8,10 @@
     "dev": "concurrently npm:dev:server npm:dev:client",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
-    "verify": "cd client && npm run verify"
+    "verify": "cd client && npm run verify",
+    "prepare": "husky install",
+    "pre-commit": "npm run prettier:check",
+    "prettier:check": "prettier --check **/*.{jsx}"
   },
   "repository": {
     "type": "git",

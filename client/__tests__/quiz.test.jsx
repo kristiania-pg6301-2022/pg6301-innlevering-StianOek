@@ -14,4 +14,18 @@ describe("QuizApp", () => {
     );
     expect(element.innerHTML).toMatchSnapshot();
   });
+
+  it("should render answers", () => {
+    const element = document.createElement("div");
+
+    ReactDOM.render(
+      <MemoryRouter>
+        <Answer correctAnswers={3} questionsAnswered={10} />
+      </MemoryRouter>
+    );
+    expect(element.querySelector("[data-testid=status]").textContent).toEqual(
+      "Your score is 3 / 10"
+    );
+    expect(element.innerHTML).toMatchSnapshot();
+  });
 });
