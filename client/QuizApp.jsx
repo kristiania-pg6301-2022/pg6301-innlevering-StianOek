@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-
+import useFetch from "./useFetch";
 export const FrontPage = () => {
   return (
     <div>
@@ -20,10 +20,10 @@ export const FrontPage = () => {
   );
 };
 
-export const Answer = ({ score }) => {
+export const Answer = ({ data }) => {
   const navigate = useNavigate();
 
-  if (!score) return <h1>LOADING...</h1>;
+  if (!data) return <h1>LOADING...</h1>;
 
   return (
     <div>
@@ -33,7 +33,7 @@ export const Answer = ({ score }) => {
       </Routes>
       <div>
         <h2 data-testid={"status"}>
-          Your score is {score.correct} / {score.answers}
+          Your score is {data.correct} / {data.answers}
         </h2>
       </div>
       <div>
@@ -48,7 +48,7 @@ export const Answer = ({ score }) => {
   );
 };
 
-export const Question = ({ score }) => {
+export const Question = () => {
   const [question, setQuestion] = useState();
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
@@ -116,25 +116,14 @@ export const Question = ({ score }) => {
 };
 
 const QuizApp = () => {
-  const [score, setScore] = useState();
+  const { data, error, loading } = useFetch("/api/score");
 
-  console.log(score);
-  const loadScore = async () => {
-    const res = await fetch("/api/score");
-    const data = await res.json();
-    return data;
-  };
-
-  useEffect(async () => {
-    setScore(undefined);
-    setScore(await loadScore());
-  }, []);
   return (
     <div>
       <Routes>
         <Route path={"/"} element={<FrontPage />} />
-        <Route path={"/question"} element={<Question score={score} />} />
-        <Route path={"/answer/*"} element={<Answer score={score} />} />
+        <Route path={"/question"} element={<Question data={data} />} />
+        <Route path={"/answer/*"} element={<Answer data={data} />} />
       </Routes>
     </div>
   );
