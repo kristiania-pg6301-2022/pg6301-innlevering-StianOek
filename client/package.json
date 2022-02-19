@@ -6,10 +6,10 @@
     "format": "prettier --write *.{jsx,js} __tests__/**/*.{jsx,js}",
     "format:check": "prettier --check *.{jsx,js} __tests__/**/*.{jsx,js} ",
     "dev": "parcel watch index.html",
-    "build": "npm install --include=dev && parcel build index.html",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "verify": "npm run format:check && npm run test:coverage"
+    "verify": "npm run format:check && npm run test:coverage",
+    "build": "npm install --include=dev && parcel build index.html"
   },
   "keywords": [],
   "author": "",

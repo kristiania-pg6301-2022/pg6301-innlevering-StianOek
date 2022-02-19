@@ -1,6 +1,5 @@
 import express from "express";
 import { randomQuestion, isCorrectAnswer, Questions } from "./quiz.js";
-import * as path from "path";
 
 export const QuestionRouter = express.Router();
 
