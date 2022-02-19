@@ -2,6 +2,9 @@
 
 [![Run tests](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-StianOek/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-StianOek/actions/workflows/test.yml)
 
+
+site: https://innlevering-pg6301.herokuapp.com/
+
 ### Client side
 
 - [x] - Create a react app with parcel
