@@ -33,3 +33,4 @@ site: https://innlevering-pg6301.herokuapp.com/
 - [x] - Fetch questions from /api/question
 - [x] - Make a post request that match the random question from GET and return true or false
 - [x] - Make score stored with cookies
+- [x] - Deploy on Heroku
