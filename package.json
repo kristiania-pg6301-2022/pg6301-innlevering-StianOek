@@ -4,7 +4,6 @@
   "description": "- [x] - create a react app with parcel\r - [x] - install react dependencies (React, ReactDOM & react-router-dom)\r - [x] - make react app run as expected /w parcel\r - [x] - structure react app and its components a proper way\r - [x] - route the application with react-router-dom\r - [ ] - install jest and babel\r - [ ] - configure babel so that the react app runs properly with jest and babel\r - [ ] - make first passing test\r - [ ] - set up github actions\r - [ ] - connect coveralls with github actions and make a badge\r - [ ] - Get more coverage with jest\r - [ ] -\r - [ ] -",
   "main": "index.js",
   "scripts": {
-    "start": "npm start",
     "dev": "concurrently npm:dev:server npm:dev:client",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
@@ -15,7 +14,8 @@
     "format": "prettier --write client/*.{jsx,js} client/__tests__/**/*.{jsx,js}",
     "build": "npm run build:server && npm run build:client",
     "build:client": "cd client && npm run build",
-    "build:server": "cd server && npm run build"
+    "build:server": "cd server && npm run build",
+    "start": "cd server && npm start"
   },
   "repository": {
     "type": "git",
