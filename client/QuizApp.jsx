@@ -23,7 +23,7 @@ export const FrontPage = () => {
 export const Answer = ({ data }) => {
   const navigate = useNavigate();
 
-  if (!data) return <h1>LOADING...</h1>;
+  if (!data) return <h1>LOADING....</h1>;
 
   return (
     <div>
