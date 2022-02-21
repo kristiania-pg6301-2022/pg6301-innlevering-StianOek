@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
-import useFetch from "./useFetch";
+import { fetchJSON, postJSON, useLoading } from "./useFetch";
 export const FrontPage = () => {
   return (
     <div>
@@ -69,19 +69,10 @@ export const Question = () => {
     return <h1>Loading...</h1>;
   }
 
-  const handleRightAnswer = (answers) => {
+  const handleRightAnswer = (answer) => {
     const id = question.id;
-    fetch("/api/question", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ id, answers }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAnswer(data);
-      });
+    postJSON("/api/question", { id, answer });
+    loadQuestion();
   };
   if (answer.result === "incorrect") {
     navigate("/answer/wrong");
@@ -116,7 +107,9 @@ export const Question = () => {
 };
 
 const QuizApp = () => {
-  const { data, error, loading } = useFetch("/api/score");
+  const { data, error, loading } = useLoading(
+    async () => await fetchJSON("/api/score")
+  );
 
   return (
     <div>
