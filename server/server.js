@@ -4,11 +4,10 @@ import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
 import path from "path";
 import { Questions, isCorrectAnswer, randomQuestion } from "./quiz.js";
-const app = express();
 dotenv.config();
-
-app.use(cookieParser(process.env.COOKIE_SECRET));
+const app = express();
 app.use(bodyParser.json());
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/api/score", (req, res) => {
@@ -20,6 +19,9 @@ app.get("/api/score", (req, res) => {
 
 app.get("/api/random", (req, res) => {
   const { id, question, answers, category } = randomQuestion();
+  if (!question) {
+    return res.sendStatus(404);
+  }
   res.json({ id, question, answers, category });
 });
 

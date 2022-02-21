@@ -69,7 +69,7 @@ export const Question = ({ reload, error }) => {
   }
 
   if (error) {
-    return <h1>Error: {error.stringify()}</h1>;
+    return <h1>An error has occured: {error.toString()}</h1>;
   }
 
   const handleReload = async () => {
