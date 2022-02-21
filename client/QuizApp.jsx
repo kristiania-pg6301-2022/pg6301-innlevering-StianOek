@@ -48,9 +48,8 @@ export const Answer = ({ data }) => {
   );
 };
 
-export const Question = () => {
+export const Question = ({ reload }) => {
   const [question, setQuestion] = useState();
-  const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -69,18 +68,32 @@ export const Question = () => {
     return <h1>Loading...</h1>;
   }
 
-  const handleRightAnswer = (answer) => {
-    const id = question.id;
-    postJSON("/api/question", { id, answer });
-    loadQuestion();
+  const handleReload = async () => {
+    setQuestion(undefined);
+    reload();
   };
-  if (answer.result === "incorrect") {
-    navigate("/answer/wrong");
-  } else if (answer.result === "correct") {
-    navigate("/answer/correct");
-  }
-  console.log(answer);
-  console.log(question);
+
+  const handleRightAnswer = async (answers) => {
+    const id = question.id;
+    const res = await fetch("/api/question", {
+      method: "post",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ id, answers }),
+    });
+    const result = await res.json();
+    console.log(result);
+
+    handleReload();
+
+    if (result.result === "incorrect") {
+      navigate("/answer/wrong");
+    } else if (result.result === "correct") {
+      navigate("/answer/correct");
+    }
+  };
+
   return (
     <div>
       <div>
@@ -107,7 +120,7 @@ export const Question = () => {
 };
 
 const QuizApp = () => {
-  const { data, error, loading } = useLoading(
+  const { reload, data, error, loading } = useLoading(
     async () => await fetchJSON("/api/score")
   );
 
@@ -115,7 +128,10 @@ const QuizApp = () => {
     <div>
       <Routes>
         <Route path={"/"} element={<FrontPage />} />
-        <Route path={"/question"} element={<Question data={data} />} />
+        <Route
+          path={"/question"}
+          element={<Question reload={reload} data={data} />}
+        />
         <Route path={"/answer/*"} element={<Answer data={data} />} />
       </Routes>
     </div>

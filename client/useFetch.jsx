@@ -24,7 +24,8 @@ export const useLoading = (Loader) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
 
-  useEffect(async () => {
+  async function reload() {
+    setError(undefined);
     setLoading(true);
     try {
       setData(await Loader());
@@ -33,12 +34,14 @@ export const useLoading = (Loader) => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  }
 
-  return { data, loading, error };
+  useEffect(reload, []);
+
+  return { reload, data, loading, error };
 };
 
-export async function postJSON(url, json) {
+export const postJSON = async (url, json) => {
   const res = await fetch(url, {
     method: "post",
     headers: {
@@ -49,4 +52,7 @@ export async function postJSON(url, json) {
   if (!res.ok) {
     throw new HttpError(res.status, res.statusText);
   }
-}
+
+  const result = await res.json();
+  console.log(result);
+};

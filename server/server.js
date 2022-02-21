@@ -45,8 +45,6 @@ app.post("/api/question", (req, res) => {
     res.cookie("score", JSON.stringify(score), { signed: true });
     return res.json({ result: "incorrect" });
   }
-
-  console.log(score);
 });
 
 app.use(express.static(path.resolve("../client/dist")));
