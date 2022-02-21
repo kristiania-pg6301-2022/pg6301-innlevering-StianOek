@@ -1,12 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
+
 import path from "path";
 import { Questions, isCorrectAnswer, randomQuestion } from "./quiz.js";
 dotenv.config();
 const app = express();
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: false }));
 
