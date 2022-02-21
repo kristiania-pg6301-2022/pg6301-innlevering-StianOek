@@ -48,13 +48,13 @@ export const Answer = ({ data }) => {
   );
 };
 
-export const Question = ({ reload }) => {
+export const Question = ({ reload, error }) => {
   const [question, setQuestion] = useState();
-  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const loadQuestion = async () => {
-    const response = await fetch("/api/question");
+    const response = await fetch("/api/random");
     const data = await response.json();
     return data;
   };
@@ -68,6 +68,10 @@ export const Question = ({ reload }) => {
     return <h1>Loading...</h1>;
   }
 
+  if (error) {
+    return <h1>Error: {error.stringify()}</h1>;
+  }
+
   const handleReload = async () => {
     setQuestion(undefined);
     reload();
@@ -75,7 +79,7 @@ export const Question = ({ reload }) => {
 
   const handleRightAnswer = async (answers) => {
     const id = question.id;
-    const res = await fetch("/api/question", {
+    const res = await fetch("/api/answer", {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -130,7 +134,7 @@ const QuizApp = () => {
         <Route path={"/"} element={<FrontPage />} />
         <Route
           path={"/question"}
-          element={<Question reload={reload} data={data} />}
+          element={<Question error={error} reload={reload} data={data} />}
         />
         <Route path={"/answer/*"} element={<Answer data={data} />} />
       </Routes>

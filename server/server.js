@@ -18,12 +18,12 @@ app.get("/api/score", (req, res) => {
   res.send(score);
 });
 
-app.get("/api/question", (req, res) => {
+app.get("/api/random", (req, res) => {
   const { id, question, answers, category } = randomQuestion();
   res.json({ id, question, answers, category });
 });
 
-app.post("/api/question", (req, res) => {
+app.post("/api/answer", (req, res) => {
   const { id, answers } = req.body;
   console.log({ id, answers });
   const question = Questions.find((questionID) => questionID.id === id);
