@@ -1,24 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { fetchJSON, postJSON, useLoading } from "./useFetch";
-export const FrontPage = () => {
-  return (
-    <div>
-      <div>
-        <h1>Do you master javascript?</h1>
-        <h2>Take a test</h2>
-      </div>
-      <div>
-        <Link to="/question">
-          <button>New quiz</button>
-        </Link>
-        <Link to="/answer/*">
-          <button>Show anwers</button>
-        </Link>
-      </div>
-    </div>
-  );
-};
+import FrontPage from "./pages/FrontPage";
 
 export const Answer = ({ data }) => {
   const navigate = useNavigate();
@@ -125,7 +108,7 @@ const QuizApp = () => {
         <Route path={"/"} element={<FrontPage />} />
         <Route
           path={"/question"}
-          element={<Question error={error} reload={reload} data={data} />}
+          element={<Question reload={reload} data={data} />}
         />
         <Route path={"/answer/*"} element={<Answer data={data} />} />
       </Routes>

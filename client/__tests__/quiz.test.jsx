@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Answer, FrontPage, Question } from "../QuizApp";
+import FrontPage from "../pages/FrontPage";
 import { MemoryRouter } from "react-router-dom";
 
 describe("QuizApp", () => {

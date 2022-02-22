@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 export class HttpError extends Error {
   constructor(status, statusText) {
@@ -35,8 +35,6 @@ export const useLoading = (Loader) => {
       setLoading(false);
     }
   }
-
-  console.log(error);
 
   useEffect(reload, []);
 
