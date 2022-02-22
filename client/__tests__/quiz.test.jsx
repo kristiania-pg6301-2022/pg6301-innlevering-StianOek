@@ -3,6 +3,10 @@ import ReactDOM from "react-dom";
 import FrontPage from "../pages/FrontPage";
 import { MemoryRouter } from "react-router-dom";
 import Answer from "../pages/Answer";
+import { act } from "react-dom/test-utils";
+import { Question } from "../QuizApp.jsx";
+
+const questionAPI = {};
 
 describe("QuizApp", () => {
   it("should show frontpage", () => {
@@ -29,5 +33,21 @@ describe("QuizApp", () => {
       "Your score is 2 / 5"
     );
     expect(element.innerHTML).toMatchSnapshot();
+  });
+
+  it("should render out random questions", async () => {
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+
+    await act(async () => {
+      ReactDOM.render(
+        <MemoryRouter>
+          <Question />
+        </MemoryRouter>,
+        container
+      );
+    });
+
+    expect(container.innerHTML).toMatchSnapshot();
   });
 });

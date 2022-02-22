@@ -5,12 +5,12 @@ import FrontPage from "./pages/FrontPage";
 import Answer from "./pages/Answer";
 
 export const Question = ({ reload }) => {
+  const navigate = useNavigate();
   const {
     data: question,
     error,
     loading,
   } = useLoading(async () => await fetchJSON("/api/random"));
-  const navigate = useNavigate();
 
   if (error) {
     return (
