@@ -30,7 +30,7 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "client/**/*{.jsx}"
+      "client/pages/*{.jsx}"
     ]
   },
   "keywords": [],
