@@ -36,6 +36,8 @@ export const useLoading = (Loader) => {
     }
   }
 
+  console.log(error);
+
   useEffect(reload, []);
 
   return { reload, data, loading, error };

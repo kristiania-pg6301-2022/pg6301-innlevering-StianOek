@@ -48,34 +48,26 @@ export const Answer = ({ data }) => {
   );
 };
 
-export const Question = ({ reload, error }) => {
-  const [question, setQuestion] = useState();
-
+export const Question = ({ reload }) => {
+  const {
+    data: question,
+    error,
+    loading,
+  } = useLoading(async () => await fetchJSON("/api/random"));
   const navigate = useNavigate();
 
-  const loadQuestion = async () => {
-    const response = await fetch("/api/random");
-    const data = await response.json();
-    return data;
-  };
-
-  useEffect(async () => {
-    setQuestion(undefined);
-    setQuestion(await loadQuestion());
-  }, []);
+  if (error) {
+    return (
+      <p>
+        An error has occured:{" "}
+        <span style={{ color: "red" }}>{error.toString()}</span>
+      </p>
+    );
+  }
 
   if (!question) {
     return <h1>Loading...</h1>;
   }
-
-  if (error) {
-    return <h1>An error has occured: {error.toString()}</h1>;
-  }
-
-  const handleReload = async () => {
-    setQuestion(undefined);
-    reload();
-  };
 
   const handleRightAnswer = async (answers) => {
     const id = question.id;
@@ -87,9 +79,8 @@ export const Question = ({ reload, error }) => {
       body: JSON.stringify({ id, answers }),
     });
     const result = await res.json();
-    console.log(result);
 
-    handleReload();
+    reload();
 
     if (result.result === "incorrect") {
       navigate("/answer/wrong");
