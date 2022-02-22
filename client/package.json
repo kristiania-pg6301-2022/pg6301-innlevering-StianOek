@@ -23,7 +23,8 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "*{.jsx,js}"
+      "*{.jsx,js}",
+      "pages/*{.jsx,js}"
     ]
   },
   "devDependencies": {
