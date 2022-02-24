@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, Route, Routes, useNavigate } from "react-router-dom";
 import { fetchJSON, postJSON, useLoading } from "./useFetch";
+
+/* Imported pages */
 import FrontPage from "./pages/FrontPage";
 import Answer from "./pages/Answer";
 
-export const Question = ({ reload }) => {
+export const Question = ({ reload, fetchQuestion }) => {
   const navigate = useNavigate();
-  const {
-    data: question,
-    error,
-    loading,
-  } = useLoading(async () => await fetchJSON("/api/random"));
+  const { data: question, error, loading } = useLoading(fetchQuestion);
 
   if (error) {
     return (
@@ -55,12 +53,8 @@ export const Question = ({ reload }) => {
         .filter((answer) => question.answers[answer])
         .map((value) => {
           return (
-            <div className="answersWrapper" key={value}>
-              <button
-                className="btn"
-                data-testid={"button"}
-                onClick={() => handleRightAnswer(value)}
-              >
+            <div key={value}>
+              <button onClick={() => handleRightAnswer(value)}>
                 {question.answers[value]}
               </button>
             </div>
@@ -74,6 +68,7 @@ const QuizApp = () => {
   const { reload, data, error, loading } = useLoading(
     async () => await fetchJSON("/api/score")
   );
+  const fetchQuestion = async () => await fetchJSON("/api/random");
 
   return (
     <div>
@@ -81,7 +76,7 @@ const QuizApp = () => {
         <Route path={"/"} element={<FrontPage />} />
         <Route
           path={"/question"}
-          element={<Question reload={reload} data={data} />}
+          element={<Question reload={reload} fetchQuestion={fetchQuestion} />}
         />
         <Route path={"/answer/*"} element={<Answer data={data} />} />
       </Routes>

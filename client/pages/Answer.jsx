@@ -7,7 +7,7 @@ const Answer = ({ data }) => {
   if (!data) return <h1>LOADING....</h1>;
 
   let correct = data.correct;
-  let answers = data.answer;
+  let answers = data.answers;
 
   return (
     <div>

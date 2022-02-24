@@ -2,6 +2,6 @@
 
 exports[`QuizApp should check for answers 1`] = `"<div><div><h2 data-testid=\\"status\\">Your score is 2 / 5</h2></div><div><a href=\\"/\\"><button>Return to home</button></a><a href=\\"/question\\"><button>New quiz</button></a></div></div>"`;
 
-exports[`QuizApp should render out random questions 1`] = `"<p>An error has occured: <span style=\\"color: red;\\">ReferenceError: fetch is not defined</span></p>"`;
+exports[`QuizApp should render out random questions 1`] = `"<div><div><h1>What is the correct JavaScript syntax to change the content of the HTML element below?</h1><h2>Category: </h2></div><div><button>#demo.innerHTML = \\"Hello World!\\";</button></div><div><button>document.getElementById(\\"demo\\").innerHTML = \\"Hello World!\\";</button></div><div><button>document.getElement(\\"p\\").innerHTML = \\"Hello World!\\";</button></div><div><button>document.getElementByName(\\"p\\").innerHTML = \\"Hello World!\\";</button></div></div>"`;
 
 exports[`QuizApp should show frontpage 1`] = `"<div><div><h1>Do you master javascript?</h1><h2>Take a test</h2></div><div><a href=\\"/question\\"><button>New quiz</button></a><a href=\\"/answer/*\\"><button>Show anwers</button></a></div></div>"`;

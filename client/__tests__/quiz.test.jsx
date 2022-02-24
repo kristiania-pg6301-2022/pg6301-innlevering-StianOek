@@ -6,8 +6,6 @@ import Answer from "../pages/Answer";
 import { act } from "react-dom/test-utils";
 import { Question } from "../QuizApp.jsx";
 
-const questionAPI = {};
-
 describe("QuizApp", () => {
   it("should show frontpage", () => {
     const element = document.createElement("div");
@@ -25,7 +23,7 @@ describe("QuizApp", () => {
 
     ReactDOM.render(
       <MemoryRouter>
-        <Answer data={{ correct: 2, answer: 5 }} />
+        <Answer data={{ correct: 2, answers: 5 }} />
       </MemoryRouter>,
       element
     );
@@ -39,10 +37,25 @@ describe("QuizApp", () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
 
+    const fetchQuestion = async () =>
+      await {
+        id: 974,
+        question:
+          "What is the correct JavaScript syntax to change the content of the HTML element below?",
+        answers: {
+          answer_a: '#demo.innerHTML = "Hello World!";',
+          answer_b:
+            'document.getElementById("demo").innerHTML = "Hello World!";',
+          answer_c: 'document.getElement("p").innerHTML = "Hello World!";',
+          answer_d:
+            'document.getElementByName("p").innerHTML = "Hello World!";',
+        },
+      };
+
     await act(async () => {
       ReactDOM.render(
         <MemoryRouter>
-          <Question />
+          <Question fetchQuestion={fetchQuestion} />
         </MemoryRouter>,
         container
       );
