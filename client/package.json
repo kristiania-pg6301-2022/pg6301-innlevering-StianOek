@@ -30,7 +30,8 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "*{.jsx,js}",
+      "*QuizApp{.jsx,js}",
+      "*usefetch{.jsx,js}",
       "pages/*{.jsx,js}"
     ]
   },

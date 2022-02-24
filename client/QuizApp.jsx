@@ -65,10 +65,10 @@ export const Question = ({ reload, fetchQuestion }) => {
 };
 
 const QuizApp = () => {
+  const fetchQuestion = async () => await fetchJSON("/api/random");
   const { reload, data, error, loading } = useLoading(
     async () => await fetchJSON("/api/score")
   );
-  const fetchQuestion = async () => await fetchJSON("/api/random");
 
   return (
     <div>

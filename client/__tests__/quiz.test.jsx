@@ -4,6 +4,7 @@ import FrontPage from "../pages/FrontPage";
 import { MemoryRouter } from "react-router-dom";
 import Answer from "../pages/Answer";
 import { act } from "react-dom/test-utils";
+import QuizApp from "../QuizApp.jsx";
 import { Question } from "../QuizApp.jsx";
 
 describe("QuizApp", () => {
@@ -33,13 +34,14 @@ describe("QuizApp", () => {
     expect(element.innerHTML).toMatchSnapshot();
   });
 
-  it("should render out random questions", async () => {
+  it("should fetch random questions", async () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
 
     const fetchQuestion = async () =>
       await {
         id: 974,
+        category: "Code",
         question:
           "What is the correct JavaScript syntax to change the content of the HTML element below?",
         answers: {
@@ -56,6 +58,29 @@ describe("QuizApp", () => {
       ReactDOM.render(
         <MemoryRouter>
           <Question fetchQuestion={fetchQuestion} />
+        </MemoryRouter>,
+        container
+      );
+    });
+    expect(container.innerHTML).toMatchSnapshot();
+    expect(container.querySelector("h1").textContent).toEqual(
+      "What is the correct JavaScript syntax to change the content of the HTML element below?"
+    );
+  });
+
+  it("should fetch score", async () => {
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+
+    const fetchScore = async () =>
+      await {
+        correct: 2,
+        answers: 5,
+      };
+    await act(async () => {
+      ReactDOM.render(
+        <MemoryRouter>
+          <QuizApp />
         </MemoryRouter>,
         container
       );
