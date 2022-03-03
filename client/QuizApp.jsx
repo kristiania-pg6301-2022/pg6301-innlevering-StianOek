@@ -25,14 +25,7 @@ export const Question = ({ reload, fetchQuestion }) => {
 
   const handleRightAnswer = async (answers) => {
     const id = question.id;
-    const res = await fetch("/api/answer", {
-      method: "post",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({ id, answers }),
-    });
-    const result = await res.json();
+    const result = await postJSON("/api/answer", { id, answers });
 
     reload();
 
@@ -53,7 +46,7 @@ export const Question = ({ reload, fetchQuestion }) => {
         .filter((answer) => question.answers[answer])
         .map((value) => {
           return (
-            <div key={value}>
+            <div key={value} data-testid={value}>
               <button onClick={() => handleRightAnswer(value)}>
                 {question.answers[value]}
               </button>

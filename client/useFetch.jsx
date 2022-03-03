@@ -54,5 +54,5 @@ export const postJSON = async (url, json) => {
   }
 
   const result = await res.json();
-  console.log(result);
+  return result;
 };

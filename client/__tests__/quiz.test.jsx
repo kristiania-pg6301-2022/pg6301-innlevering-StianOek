@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import FrontPage from "../pages/FrontPage";
 import { MemoryRouter } from "react-router-dom";
 import Answer from "../pages/Answer";
-import { act } from "react-dom/test-utils";
-import QuizApp from "../QuizApp.jsx";
+import { act, Simulate } from "react-dom/test-utils";
+
 import { Question } from "../QuizApp.jsx";
 
 describe("QuizApp", () => {
@@ -38,6 +38,8 @@ describe("QuizApp", () => {
     const container = document.createElement("div");
     document.body.appendChild(container);
 
+    const reload = jest.fn();
+
     const fetchQuestion = async () =>
       await {
         id: 974,
@@ -56,36 +58,18 @@ describe("QuizApp", () => {
 
     await act(async () => {
       ReactDOM.render(
-        <MemoryRouter>
+        <MemoryRouter initialEntries={["/question"]}>
           <Question fetchQuestion={fetchQuestion} />
         </MemoryRouter>,
         container
       );
+      // Simulate.click(container.querySelector("[data-testid=answer_a] button"));
     });
+
     expect(container.innerHTML).toMatchSnapshot();
+    //expect(reload).toBeCalled();
     expect(container.querySelector("h1").textContent).toEqual(
       "What is the correct JavaScript syntax to change the content of the HTML element below?"
     );
-  });
-
-  it("should fetch score", async () => {
-    const container = document.createElement("div");
-    document.body.appendChild(container);
-
-    const fetchScore = async () =>
-      await {
-        correct: 2,
-        answers: 5,
-      };
-    await act(async () => {
-      ReactDOM.render(
-        <MemoryRouter>
-          <QuizApp />
-        </MemoryRouter>,
-        container
-      );
-    });
-
-    expect(container.innerHTML).toMatchSnapshot();
   });
 });
