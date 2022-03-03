@@ -38,5 +38,12 @@
         }
       ]
     ]
+  },
+  "jest": {
+    "collectCoverage": true,
+    "testEnvironment": "jsdom",
+    "collectCoverageFrom": [
+      "*.{js,jsx}"
+    ]
   }
 }

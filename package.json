@@ -7,7 +7,7 @@
     "dev": "concurrently npm:dev:server npm:dev:client",
     "dev:server": "cd server && npm run dev",
     "dev:client": "cd client && npm run dev",
-    "verify": "cd client && npm run verify",
+    "verify": "jest --coverage",
     "prepare": "husky install",
     "pre-commit": "npm run prettier:check",
     "prettier:check": "prettier --check client/*.{jsx,js} client/__tests__/**/*.{jsx,js}",
@@ -30,7 +30,10 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "client/**/*{.jsx}"
+      "client/pages/*.{js,jsx}",
+      "client/*QuizApp.{jsx,js}",
+      "client/*useFetch.{jsx,js}",
+      "server/*.{js}"
     ]
   },
   "keywords": [],
@@ -47,7 +50,8 @@
     "concurrently": "^7.0.0",
     "husky": "^7.0.4",
     "jest": "^27.5.1",
-    "prettier": "^2.5.1"
+    "prettier": "^2.5.1",
+    "supertest": "^6.2.2"
   },
   "dependencies": {
     "react": "^17.0.2",
