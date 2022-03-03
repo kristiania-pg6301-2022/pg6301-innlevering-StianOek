@@ -30,10 +30,17 @@
   "jest": {
     "testEnvironment": "jsdom",
     "collectCoverageFrom": [
-      "client/pages/*.{js,jsx}",
-      "client/*QuizApp.{jsx,js}",
-      "client/*useFetch.{jsx,js}",
-      "server/*.{js}"
+      "**/*.{jsx,tsx,ts,js}",
+      "!coverage/**",
+      "!client/coverage/**",
+      "!client/dist/**",
+      "!server/server.ts",
+      "!dist/**",
+      "!babel.config.js",
+      "!client/index.tsx",
+      "!config/**",
+      "!client/index.jsx",
+      "!server/coverage/**"
     ]
   },
   "keywords": [],
