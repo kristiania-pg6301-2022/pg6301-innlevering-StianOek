@@ -10,10 +10,6 @@
 ![Heroku](https://img.shields.io/badge/Heroku-430098?style=for-the-badge&logo=heroku&logoColor=white)
 
 
-> There is a error i cant get a hold on within server tests that throws me this: ReferenceError: setImmediate is not defined
-> I cant seem to figure this one out. 
-
-
 # Website
 https://innlevering-pg6301.herokuapp.com/
 
@@ -46,3 +42,6 @@ https://innlevering-pg6301.herokuapp.com/
 - [x] - Make a post request that match the random question from GET and return true or false
 - [x] - Make score stored with cookies
 - [x] - Deploy on Heroku
+
+> There is a error i cant get a hold on within server tests that throws me this: ReferenceError: setImmediate is not defined
+> I cant seem to figure this one out. 
