@@ -2,6 +2,9 @@
 [![Run tests](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-StianOek/actions/workflows/test.yml/badge.svg)](https://github.com/kristiania-pg6301-2022/pg6301-innlevering-StianOek/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/kristiania-pg6301-2022/pg6301-innlevering-StianOek/badge.svg?branch=main)](https://coveralls.io/github/kristiania-pg6301-2022/pg6301-innlevering-StianOek?branch=main)
 
+
+https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+
 site: https://innlevering-pg6301.herokuapp.com/
 
 ### Client side
