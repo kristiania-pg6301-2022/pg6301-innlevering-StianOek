@@ -10,7 +10,7 @@
     "build": "npm install",
     "verify": "npm run test:coverage",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --collectCoverage"
   },
   "keywords": [],
   "author": "",
@@ -42,7 +42,7 @@
   },
   "jest": {
     "collectCoverage": true,
-    "testEnvironment": "node",
+    "testEnvironment": "jsdom",
     "collectCoverageFrom": [
       "*.{js,jsx}"
     ]

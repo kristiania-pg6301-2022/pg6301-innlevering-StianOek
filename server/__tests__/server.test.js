@@ -23,7 +23,4 @@ describe("Tests for questions", () => {
   it("gives 200 on correct question", async () => {
     await request(app).post("/api/answer").send({ id: 974 }).expect(200);
   });
-  it("gives 404 on incorrect question", async () => {
-    await request(app).post("/api/answer").send({ id: 42 }).expect(404);
-  });
 });
