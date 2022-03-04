@@ -3,14 +3,14 @@ import { Questions, isCorrectAnswer, randomQuestion } from "./quiz.js";
 
 export const QuizApp = express.Router();
 
-QuizApp.get("/api/score", (req, res) => {
+QuizApp.get("/score", (req, res) => {
   const score = req.signedCookies.score
     ? JSON.parse(req.signedCookies.score)
     : { answers: 0, correct: 0 };
   res.send(score);
 });
 
-QuizApp.get("/api/random", (req, res) => {
+QuizApp.get("/random", (req, res) => {
   const { id, question, answers, category } = randomQuestion();
   if (!question) {
     return res.sendStatus(404);
@@ -18,13 +18,13 @@ QuizApp.get("/api/random", (req, res) => {
   res.json({ id, question, answers, category });
 });
 
-QuizApp.post("/api/answer", (req, res) => {
+QuizApp.post("/answer", (req, res) => {
   const { id, answers } = req.body;
-  console.log({ id, answers });
+
   const question = Questions.find((questionID) => questionID.id === id);
 
   if (!question) {
-    res.sendStatus(404);
+    res.status(404).send("This is 404");
   }
   const score = req.signedCookies.score
     ? JSON.parse(req.signedCookies.score)

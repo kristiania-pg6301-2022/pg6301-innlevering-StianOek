@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.urlencoded({ extended: false }));
-app.use("/", QuizApp);
+app.use("/api", QuizApp);
 
 app.use(express.static(path.resolve("../client/dist")));
 
