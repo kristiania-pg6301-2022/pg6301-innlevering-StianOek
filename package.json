@@ -40,7 +40,8 @@
       "!client/index.tsx",
       "!config/**",
       "!client/index.jsx",
-      "!server/coverage/**"
+      "!server/coverage/**",
+      "!server/server.js"
     ]
   },
   "keywords": [],
