@@ -45,3 +45,26 @@ https://innlevering-pg6301.herokuapp.com/
 
 > There is a error i cant get a hold on within server tests that throws me this: ReferenceError: setImmediate is not defined <br />
 > I cant seem to figure this one out. 
+
+
+# Applikasjonen skal vise at dere behersker:
+
+- [] Parcel
+- [] React
+- [] React Router
+- [] Jest
+- [] Github Actions
+- [] Coveralls
+- [] Express
+- [] Heroku
+# Oppsummert:
+
+- [] Få en Parcel til å bygge en React applikasjon
+- [] Få React Router til å navigere rundt i applikasjonen
+- [] Få React til å hente og lagre informasjon til et API
+- [] Få Github Actions til å kjøre Jest-testene og publisere coverage til Coveralls
+- [] Få Heroku til å publisere websidene
+# Express-serveren skal ha følgende API:
+
+- [] GET /api/question - returnerer et tilfeldig spørsmål med { id, category, question, answers }
+- [] POST /api/question - tar inn { id, answer } og returnerer "true" eller "false"
