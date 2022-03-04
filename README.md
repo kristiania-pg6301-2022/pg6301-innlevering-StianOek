@@ -43,5 +43,5 @@ https://innlevering-pg6301.herokuapp.com/
 - [x] - Make score stored with cookies
 - [x] - Deploy on Heroku
 
-> There is a error i cant get a hold on within server tests that throws me this: ReferenceError: setImmediate is not defined
+> There is a error i cant get a hold on within server tests that throws me this: ReferenceError: setImmediate is not defined <br />
 > I cant seem to figure this one out. 
