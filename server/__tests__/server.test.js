@@ -23,4 +23,10 @@ describe("Tests for questions", () => {
   it("gives 200 on correct question", async () => {
     await request(app).post("/api/answer").send({ id: 974 }).expect(200);
   });
+
+  // I dont know why this test throws me the " ReferenceError: setImmediate is not defined "
+
+  //it("gives 404 on incorrect question", async () => {
+  //  await request(app).post("/api/answer").send({ id: -222 }).expect(404);
+  //});
 });
