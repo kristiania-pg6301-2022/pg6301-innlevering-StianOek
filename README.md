@@ -16,7 +16,7 @@
 # Website
 https://innlevering-pg6301.herokuapp.com/
 
-### Client side
+# Client side
 
 - [x] - Create a react app with parcel
 - [x] - Install react dependencies (React, ReactDOM & react-router-dom)
@@ -34,7 +34,7 @@ https://innlevering-pg6301.herokuapp.com/
 - [x] - Let coveralls read tests with jest --coverage
 - [x] - Added husky to make sure i cannot commit a unformated code
 
-### Server side
+# Server side
 
 - [x] - Install express /w nessecary dependencies
 - [x] - Make server listen to port 3000
